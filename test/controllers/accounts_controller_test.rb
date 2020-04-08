@@ -22,6 +22,23 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     assert_equal JSON.parse(@response.body)['errors'].pop, 'Username has already been taken'
   end
 
+  test 'get account balance' do
+    post signup_url(id: 'my_id_2', username: 'username_2', password: 'password_2', password_confirmation: 'password_2', balance: 30.0)
+    assert_response :success
+    post signin_url(username: 'username_2', password: 'password_2')
+    assert_response :success
+    token = JSON.parse(@response.body)['token']
+
+    get balance_url(account_id: 'my_id_2'), headers: { authorization: "Bearer #{token}" }
+    assert_response :success
+  end
+
+  test 'not get balance from inexistent account' do
+    get balance_url(account_id: 'my_id')
+
+    assert_response :unauthorized
+  end
+
   def teardown
     Account.delete_all
   end
