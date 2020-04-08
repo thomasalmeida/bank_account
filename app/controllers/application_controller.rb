@@ -26,8 +26,8 @@ class ApplicationController < ActionController::API
     decoded_hash = decoded_token
     return nil if decoded_hash.nil?
 
-    user_id = decoded_hash[0]['user_id']
-    @current_user = User.find_by(id: user_id)
+    user_id = decoded_hash[0]['account_id']
+    @current_user = Account.find_by(id: user_id)
   end
 
   def logged_in?
