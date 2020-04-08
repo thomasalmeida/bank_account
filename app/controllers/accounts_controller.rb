@@ -2,6 +2,16 @@ class AccountsController < ApplicationController
   skip_before_action :require_login, only: [:create]
 
   def create
+    account = Account.create(account_params)
+
+    if account.valid?
+      payload = { account_id: account.id }
+      token = encode_token(payload)
+
+      render json: { account_id: account.id, token: token }
+    else
+      render json: { errors: account.errors.full_messages }, status: :not_acceptable
+    end
   end
 
   private
