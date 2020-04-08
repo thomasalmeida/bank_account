@@ -14,6 +14,15 @@ class AccountsController < ApplicationController
     end
   end
 
+  def get_balance
+    begin
+      account = Account.find(params[:account_id])
+
+      render json: { balance: account.balance }
+    rescue => exception
+      render json: { errors: exception.message }, status: :not_found
+    end
+  end
   private
 
   def account_params
