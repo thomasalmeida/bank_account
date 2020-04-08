@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_08_093537) do
+ActiveRecord::Schema.define(version: 2020_04_08_125624) do
 
   create_table "accounts", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "username", null: false
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 2020_04_08_093537) do
     t.float "balance", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "source_id", null: false
+    t.bigint "destination_id", null: false
+    t.float "amount", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["destination_id"], name: "index_transactions_on_destination_id"
+    t.index ["source_id"], name: "index_transactions_on_source_id"
   end
 
 end
