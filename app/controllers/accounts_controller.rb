@@ -23,6 +23,7 @@ class AccountsController < ApplicationController
       render json: { errors: exception.message }, status: :not_found
     end
   end
+
   private
 
   def account_params
