@@ -1,9 +1,9 @@
 class Account < ApplicationRecord
   has_secure_password
 
-  validates :id, uniqueness: true
+  validates_uniqueness_of :id, case_sensitive: true
   validates :username, presence: true
-  validates :username, uniqueness: true
+  validates_uniqueness_of :username, case_sensitive: true
   validates :password, presence: true
   validates :balance, presence: true
 end
