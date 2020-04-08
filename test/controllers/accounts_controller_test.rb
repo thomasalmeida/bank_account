@@ -1,8 +1,8 @@
 class AccountsControllerTest < ActionDispatch::IntegrationTest
   test 'create a valid account' do
-    post signup_url(id: 'my_id', username: 'username', password: 'password', password_confirmation: 'password', balance: 5.0)
+    post signup_url(id: 'my_id_valid', username: 'username', password: 'password', password_confirmation: 'password', balance: 5.0)
     assert_response :success
-    assert_equal Account.count, 1
+    assert Account.find_by(id: 'my_id_valid')
     assert_equal JSON.parse(@response.body).keys, ['account_id', 'token']
   end
 
