@@ -8,7 +8,7 @@ class AuthController < ApplicationController
       token = encode_token(payload)
       render json: { account: account, token: token }
     else
-      render json: { failure: "Log in failed!" }
+      render json: { failure: "Log in failed!" }, status: :unprocessable_entity
     end
   end
 end
