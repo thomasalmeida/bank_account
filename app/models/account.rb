@@ -6,4 +6,5 @@ class Account < ApplicationRecord
   validates_uniqueness_of :username, case_sensitive: true
   validates :password, presence: true
   validates :balance, presence: true
+  validates :balance, numericality: true
 end
