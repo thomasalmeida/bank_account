@@ -6,8 +6,3 @@ one:
   password_digest: MyString
   balance: 1.5
 
-two:
-  id: MyString
-  username: MyString
-  password_digest: MyString
-  balance: 1.5
